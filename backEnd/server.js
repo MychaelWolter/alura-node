@@ -30,9 +30,12 @@ app.get("/posts", (req, res) => {
 });
 
 function buscarPostporID(id) {
-    return posts
+    return posts.findIndex((post) => {
+        return post.id === Number(id);
+    });
 };
 
 app.get("/posts/:id", (req, res) => {
-    res.status(200).json(posts);
+    const index = buscarPostporID(req.params.id);
+    res.status(200).json(posts[index]);
 });
